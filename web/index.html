@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>分享</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/icon.svg">
+<meta name="theme-color" content="#0a0c11">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<!-- 访问密码 -->
+<section id="gate" hidden>
+  <div class="gate-card">
+    <div class="gate-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+           stroke-linecap="round" stroke-linejoin="round">
+        <rect x="4" y="10" width="16" height="11" rx="3"/>
+        <path d="M8 10V7a4 4 0 0 1 8 0v3"/>
+      </svg>
+    </div>
+    <h2>需要访问密码</h2>
+    <p id="gateTip">请输入分享者告诉你的密码</p>
+    <input id="gateInput" type="password" autocomplete="current-password"
+           placeholder="访问密码" enterkeyhint="go">
+    <button id="gateBtn" class="primary">进入</button>
+    <div id="gateErr" class="err" hidden></div>
+  </div>
+</section>
+
+<!-- 主界面 -->
+<div id="shell" hidden>
+
+  <header id="top">
+    <div class="top-row">
+      <div id="brand">
+        <span id="logo" aria-hidden="true"></span>
+        <span id="brandText">分享</span>
+      </div>
+      <nav id="crumb"></nav>
+      <div class="top-actions">
+        <button id="searchBtn" class="icon-btn" title="搜索" aria-label="搜索">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        </button>
+        <button id="viewBtn" class="icon-btn" title="切换视图" aria-label="切换视图"></button>
+        <button id="refreshBtn" class="icon-btn" title="刷新" aria-label="刷新">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 5v6h-6"/></svg>
+        </button>
+      </div>
+    </div>
+    <div id="searchBar" hidden>
+      <input id="search" type="search" placeholder="筛选当前目录…" autocomplete="off">
+    </div>
+    <div id="timer" class="timer" hidden></div>
+  </header>
+
+  <main id="app"></main>
+
+  <footer id="foot">
+    <span id="footLeft"></span>
+    <button id="upBtn" class="foot-up" title="上传文件到「收件箱」" hidden>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
+      <span>上传文件</span>
+    </button>
+    <span id="footRight"></span>
+  </footer>
+
+  <div class="fabs">
+    <button id="topBtn" class="fab off" title="回到顶部">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+           stroke-linecap="round" stroke-linejoin="round"><path d="m6 15 6-6 6 6"/></svg>
+    </button>
+  </div>
+
+  <input id="upInput" type="file" multiple hidden>
+  <div id="dropMask"><div class="drop-inner"><div class="drop-icon">⬆</div>松手即可上传到「收件箱」</div></div>
+  <div id="toastWrap"></div>
+
+  <!-- 预览层 -->
+  <div id="lb">
+    <button class="lb-btn" id="lbClose" aria-label="关闭">✕</button>
+    <button class="lb-btn" id="lbPrev" aria-label="上一个">‹</button>
+    <button class="lb-btn" id="lbNext" aria-label="下一个">›</button>
+    <div id="lbBody"></div>
+    <div id="lbCap">
+      <div class="lb-name"><b id="lbName"></b><span id="lbMeta"></span></div>
+      <div class="lb-tools"><a id="lbDl" download>⬇ 下载</a></div>
+    </div>
+  </div>
+
+  <!-- 上传进度 -->
+  <div id="upBox" hidden>
+    <div class="up-head"><span id="upName"></span><span id="upPct">0%</span></div>
+    <div class="up-bar"><i id="upBar"></i></div>
+  </div>
+
+</div>
+
+<script src="/static/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+{
+  "name": "xuantian",
+  "label": "玄天典籍",
+  "title": "分享助手",
+  "font": "Microsoft YaHei UI",
+  "radius": 4,
+  "colors": {
+    "bg": "#0d1119",
+    "panel": "#111820",
+    "card": "#182230",
+    "card_hover": "#1e2d40",
+    "border": "#2a3d50",
+    "border_hi": "#3d5a72",
+    "text": "#dde6f0",
+    "text_dim": "#7a99b4",
+    "accent": "#c9922a",
+    "accent_hover": "#e3a83a",
+    "accent2": "#4fc3c8",
+    "ok": "#5ecb8a",
+    "warn": "#e9b233",
+    "danger": "#e05a52"
+  }
+}

@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>接收区 · <!--APP_TITLE--></title>
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0f1115">
+<!--SKIN-->
+<style>
+:root{
+  --panel:rgba(255,255,255,.05); --panel-2:rgba(255,255,255,.08);
+  --line:rgba(255,255,255,.10); --r-card:16px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+[hidden]{display:none!important}
+html,body{height:100%}
+body{
+  margin:0;color:var(--fg);font:15px/1.55 system-ui,-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+  background:
+    radial-gradient(900px 520px at 85% -10%,color-mix(in srgb,var(--accent) 22%,transparent),transparent 60%),
+    radial-gradient(760px 460px at -10% 110%,color-mix(in srgb,var(--accent-2) 18%,transparent),transparent 62%),
+    linear-gradient(180deg,var(--bg),#0b0e15 70%);
+  background-attachment:fixed;
+  min-height:100%;
+}
+.wrap{max-width:720px;margin:0 auto;padding:28px 18px 56px}
+.brand{display:flex;align-items:center;gap:10px;margin-bottom:18px;color:var(--sub);font-size:13px;letter-spacing:.3px}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--ok,#3ecf8e);box-shadow:0 0 0 4px color-mix(in srgb,var(--ok,#3ecf8e) 22%,transparent)}
+h1{font-size:24px;margin:0 0 6px;letter-spacing:.2px}
+.sub{color:var(--sub);margin:0 0 20px;font-size:13.5px}
+
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-card);padding:18px}
+.gate{max-width:420px;margin:8vh auto 0;text-align:center}
+.gate .lock{font-size:30px;margin-bottom:10px}
+.gate h2{margin:0 0 6px;font-size:19px}
+.gate p{color:var(--sub);font-size:13.5px;margin:0 0 16px}
+input[type=password],input[type=text]{
+  width:100%;height:46px;border-radius:11px;border:1px solid var(--line);
+  background:rgba(0,0,0,.28);color:var(--fg);padding:0 14px;font-size:15px;outline:none
+}
+input:focus{border-color:var(--accent)}
+button{font:inherit;cursor:pointer;border:0;border-radius:11px}
+.btn-primary{width:100%;height:46px;margin-top:12px;background:var(--accent);color:#fff;font-weight:600;font-size:15px}
+.btn-primary:hover{filter:brightness(1.08)}
+.btn-primary:disabled{opacity:.55;cursor:not-allowed}
+.err{color:var(--danger);font-size:13px;margin-top:10px;min-height:18px}
+
+.drop{
+  position:relative;border:1.5px dashed var(--line);border-radius:var(--r-card);
+  padding:38px 18px;text-align:center;transition:.18s;background:rgba(255,255,255,.02)
+}
+.drop.over{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,transparent)}
+.drop .big{font-size:34px;line-height:1;margin-bottom:10px}
+.drop h3{margin:0 0 6px;font-size:17px}
+.drop p{margin:0 0 16px;color:var(--sub);font-size:13px}
+.btn-ghost{height:40px;padding:0 18px;background:var(--panel-2);color:var(--fg);border:1px solid var(--line)}
+.btn-ghost:hover{border-color:var(--accent)}
+
+.list{margin-top:16px;display:flex;flex-direction:column;gap:8px}
+.item{display:flex;align-items:center;gap:12px;padding:11px 13px;border:1px solid var(--line);border-radius:12px;background:rgba(0,0,0,.18)}
+.item .info{flex:1;min-width:0}
+.item .name{font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.item .meta{font-size:11.5px;color:var(--sub);margin-top:2px}
+.bar{height:4px;border-radius:3px;background:rgba(255,255,255,.10);margin-top:7px;overflow:hidden}
+.bar>i{display:block;height:100%;width:0;background:var(--accent);transition:width .15s}
+.state{font-size:12px;color:var(--sub);flex:0 0 auto}
+.state.ok{color:var(--ok,#3ecf8e)}
+.state.bad{color:var(--danger)}
+
+.foot{margin-top:22px;color:var(--sub);font-size:12.5px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+#toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:#111826;border:1px solid var(--line);
+  color:var(--fg);padding:10px 18px;border-radius:11px;font-size:13.5px;opacity:0;pointer-events:none;transition:.25s}
+#toast.show{opacity:1}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- 密码门 -->
+  <section id="gate" class="gate" hidden>
+    <div class="lock">🔒</div>
+    <h2>需要访问密码</h2>
+    <p id="gateTip">请输入分享者给你的密码</p>
+    <input id="gateInput" type="password" autocomplete="current-password" placeholder="访问密码" enterkeyhint="go">
+    <button id="gateBtn" class="btn-primary">进入接收区</button>
+    <div id="gateErr" class="err"></div>
+  </section>
+
+  <!-- 主界面 -->
+  <section id="main" hidden>
+    <div class="brand"><span class="dot"></span><span id="brandText">接收区</span></div>
+    <h1>把文件传给对方</h1>
+    <p class="sub" id="subTip">拖进来或点下面的按钮，传完对方就能收到。</p>
+
+    <div class="card">
+      <div class="drop" id="drop">
+        <div class="big">⬆</div>
+        <h3>把文件拖到这里</h3>
+        <p>支持多选、支持文件夹里的多个文件</p>
+        <button class="btn-ghost" id="pickBtn">选择文件</button>
+        <input id="fileInput" type="file" multiple hidden>
+      </div>
+      <div class="list" id="list"></div>
+    </div>
+
+    <div class="foot">
+      <span id="footLeft"></span>
+      <span id="footRight"></span>
+    </div>
+  </section>
+</div>
+<div id="toast"></div>
+<script src="/static/receive.js"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+{
+  "name": "default",
+  "label": "默认深色",
+  "title": "分享助手",
+  "font": "Microsoft YaHei UI",
+  "radius": 14,
+  "colors": {
+    "bg": "#0f1115",
+    "panel": "#151922",
+    "card": "#1a202b",
+    "card_hover": "#222a38",
+    "border": "#28303d",
+    "border_hi": "#36415a",
+    "text": "#e9eef7",
+    "text_dim": "#93a0b4",
+    "accent": "#4f8cff",
+    "accent_hover": "#6ba0ff",
+    "accent2": "#8b5cf6",
+    "ok": "#3ecf8e",
+    "warn": "#f5a524",
+    "danger": "#f45b69"
+  }
+}
