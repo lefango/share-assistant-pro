@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-"""一键打包安装包：app 目录 → payload.zip → 单文件安装程序。
+"""一键打包安装包：app 目录 → payload.zip → 安装程序（目录版）。
 
 用法：python installer/build_installer.py
 前置：先跑过 python build.py（生成 dist/分享助手Pro/）
-产物：installer/dist/分享助手Pro_安装程序.exe
+产物：installer/dist/分享助手Pro_安装程序/（整个文件夹压成 zip 发出去）
 """
 from __future__ import annotations
 
@@ -44,11 +44,18 @@ def main() -> int:
     if code != 0:
         print("打包失败")
         return code
-    exe = os.path.join(HERE, "dist", "分享助手Pro_安装程序.exe")
+    exe = os.path.join(HERE, "dist", "分享助手Pro_安装程序", "分享助手Pro_安装程序.exe")
     if not os.path.isfile(exe):
         print("没找到安装程序：", exe)
         return 1
-    print(f"完成：{exe}  {os.path.getsize(exe) / 1024 / 1024:.1f} MB")
+    total = 0
+    for base, _dirs, files in os.walk(os.path.dirname(exe)):
+        for name in files:
+            try:
+                total += os.path.getsize(os.path.join(base, name))
+            except OSError:
+                pass
+    print(f"完成：{os.path.dirname(exe)}（{total / 1024 / 1024:.0f} MB，整个文件夹压 zip 分发）")
     return 0
 
 

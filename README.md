@@ -38,12 +38,14 @@
 
 ### 安装
 
-1. 到 [Releases](../../releases) 下载 `分享助手Pro_安装程序.exe`
-2. 双击，选安装目录（默认 `C:\Program Files\分享助手Pro`），点「开始安装」
-3. 装完自动启动，桌面/开始菜单有快捷方式，控制面板可卸载
+1. 到 [Releases](https://github.com/lefango/share-assistant-pro/releases) 下载 `ShareAssistantPro_Setup_3.0.0.zip`
+2. 解压，双击里面的 `分享助手Pro_安装程序.exe`
+3. 选安装目录（默认 `C:\Program Files\分享助手Pro`），点「开始安装」
+4. 装完自动启动；桌面/开始菜单有快捷方式，控制面板可卸载
 
-> 若双击没反应：把安装包挪到纯英文路径（例如 `C:\Temp`）再运行。
-> 个别系统开着「UTF-8 全局编码」时，单文件安装包在中文路径下会起不来。
+> 安装程序是目录版（本机 PyInstaller 单文件在含中文的路径下会报
+> `Could not create temporary directory`），所以发的是 zip，解压后再运行。
+> 想直接免安装用：把 zip 里的 `_internal` 和 `分享助手Pro.exe` 放一起，双击 exe 即可。
 
 ### 用法（三步）
 
@@ -112,13 +114,15 @@ No account, no public IP, no router port forwarding.
 
 ### Install
 
-1. Grab `分享助手Pro_安装程序.exe` from [Releases](../../releases)
-2. Run it, choose a folder (default `C:\Program Files\分享助手Pro`), click install
-3. The app launches automatically; shortcuts and an uninstall entry are created
+1. Grab `ShareAssistantPro_Setup_3.0.0.zip` from
+   [Releases](https://github.com/lefango/share-assistant-pro/releases)
+2. Unzip it and run `分享助手Pro_安装程序.exe`
+3. Pick a folder (default `C:\Program Files\分享助手Pro`) and click install
+4. The app launches automatically; shortcuts and an uninstall entry are created
 
-> If double-clicking does nothing, move the installer to an ASCII-only path
-> (e.g. `C:\Temp`). Some machines with the global UTF-8 option enabled fail to
-> start single-file PyInstaller builds from non-ASCII paths.
+> The installer is a directory build (single-file PyInstaller fails on this
+> machine when the path contains Chinese characters), hence the zip. To skip
+> installing, keep `_internal` next to `分享助手Pro.exe` and run the exe.
 
 ### Usage
 
